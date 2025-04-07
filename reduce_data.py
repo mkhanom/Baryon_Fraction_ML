@@ -3,20 +3,7 @@
 import numpy as np
 import pandas as pd
 import illustris_python as il
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.inspection import permutation_importance
-from sklearn.metrics import r2_score
-import seaborn as sns
-from interpret.glassbox import ExplainableBoostingRegressor
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.ensemble import RandomForestRegressor
-import os
-import h5py
-
-from tqdm import tqdm
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from colossus.cosmology import cosmology
 
 basePath = '/home/kellerbw/illustris/TNG100-1' 
 little_h = 0.6774
@@ -86,9 +73,7 @@ for ID in group_ID:
     Mass = il.snapshot.loadHalo(basePath, 99, ID, 0, fields=['Masses'])
     SFG.append(sum(Mass[SFR > 0]))
 
-from colossus.cosmology import cosmology
 cosmo=cosmology.setCosmology('planck15')
-import numpy as np
 
 # MST feature in Gyr (converted from scale factor)
 MST = []
