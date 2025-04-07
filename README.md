@@ -1,5 +1,6 @@
 # Baryon_Fraction_ML
 ## Description of Scripts
+* `Final Preprocessing.ipynb`-A Jupyter notebook that loads raw data from the IllustrisTNG simulation, filters halos based on stellar mass and gas mass criteria, creates a cleaned Dataframe, and then processed data is saved as full_illustris_df100.pkl for further analysis.
 * `gen_ebm_accuracy.py`-Generates a scatter plot comparing actual vs. predicted baryon fraction values along with the R² score for the EBM model.
 * `gen_ebm_bistd_best.py`-Trains multiple EBM models, computes the standard deviation of bivariate interaction functions across models, and visualizes the two significant interaction functions to highlight the variability and model uncertainty.
 * `gen_ebm_bivariate.py`-Loads a trained EBM model, selects two specific bivariate interaction functions, and visualizes their interaction functions as heatmaps.
