@@ -11,4 +11,4 @@
 * `gen_ustd.py`
 * `gen_Z_score.py`
 * `preprocess_data.py`
-* `Model_Training.ipynb`
+* `Model_Training.ipynb`-Trains an RF model, performs feature selection using permutation importance, and then trains an EBM model using the top five most significant features.
