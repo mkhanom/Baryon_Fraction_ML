@@ -13,3 +13,4 @@
 * `gen_Z_score.py`-Trains multiple EBM models using the five most important features, calculates the Z-scores of bivariate interaction functions across these models, and visualizes the two most significant interactions.
 * `preprocess_data.py`-Prepare the dataset for training the models, applying feature filtering, and performing log transformations.
 * `Model_Training.ipynb`-A Jupyter notebook that trains an RF model, performs feature selection using permutation importance, and then trains an EBM model using the top five most significant features.
+* `stellar_merger_history.ipynb`-Loads merger history and stellar assembly data from IllustrisTNG HDF5 files and compiles them into a DataFrame. The final dataset is saved as stellar_merge_history.csv for further analysis.
