@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # # Importing Necessary Libraries
+import h5py
 import numpy as np
 import pandas as pd
 import illustris_python as il
@@ -36,7 +37,19 @@ subhaloFields = ['SubhaloFlag', 'SubhaloGasMetalFractions', 'SubhaloMassInRad','
                 'SubhaloStarMetallicityMaxRad','SubhaloGasMetallicityMaxRad','SubhaloGasMetallicityHalfRad','SubhaloStarMetallicityHalfRad','SubhaloVelDisp','SubhaloBfldHalo','SubhaloGasMetallicitySfr','SubhaloHalfmassRadType'] + subhaloMassFields
 subhaloFields.append('SubhaloBfldHalo')
 subhalo_data = il.groupcat.loadSubhalos(basePath, 99, subhaloFields)
-df_stellar_merger_history = pd.read_csv('stellar_merge_history.csv', index_col=0)
+
+data = {}
+merger_history_path = '/home/kellerbw/illustris/TNG100-1/MergerHistory_099.hdf5'
+steller_assembly_path = '/home/kellerbw/illustris/TNG100-1/stellar_assembly.hdf5'
+with h5py.File(merger_history_path, 'r') as f:
+    data['NumMajorMergersTotal'] = f['NumMajorMergersTotal'][:]
+    data['NumMajorMergersLastGyr'] = f['NumMajorMergersLastGyr'][:]                             
+
+with h5py.File(steller_assembly_path, 'r') as f:
+    data['StellarMassExSitu'] = f['Snapshot_99']['StellarMassExSitu'][:]
+
+df_stellar_merger_history = pd.DataFrame(data)
+
 
 for col in df_stellar_merger_history.columns:
     subhalo_data[col] = df_stellar_merger_history[col].values
