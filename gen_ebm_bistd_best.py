@@ -26,7 +26,7 @@ if __name__ == "__main__":
     with open("ebm_trained.pkl", 'rb') as ebm_pkl:
         ebm = pickle.load(ebm_pkl)
 
-    df100 = pd.read_pickle("/home/mkhanom/Final_Model_T/full_illustris_df100.pkl")
+    df100 = pd.read_pickle("full_illustris_df100.pkl")
 
     # Specified features
     selected_features = [

@@ -14,7 +14,7 @@ def get_feature_names():
 
 def get_train_test_data(log_data=True):
     # Load the data
-    df100 = pd.read_pickle("/home/mkhanom/Final_Model_T/full_illustris_df100.pkl")
+    df100 = pd.read_pickle("full_illustris_df100.pkl")
 
     # Gravitational constant with units
     G = 4.302e-6  # kpc (km/s)^2 M_sun^-1

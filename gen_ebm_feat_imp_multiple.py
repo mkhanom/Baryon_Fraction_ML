@@ -33,7 +33,7 @@ def add_units_to_feature_names(feature_names, feature_units):
 
 # Function to load and preprocess data
 def get_train_test_data(log_data=True):
-    df100 = pd.read_pickle("/home/mkhanom/Final_Model_T/full_illustris_df100.pkl")
+    df100 = pd.read_pickle("full_illustris_df100.pkl")
 
     G = 4.302e-6  # kpc (km/s)^2 M_sun^-1
 

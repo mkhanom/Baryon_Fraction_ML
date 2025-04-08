@@ -27,7 +27,7 @@ def add_units_to_feature_names(feature_names, feature_units):
 
 if __name__ == "__main__":
     # Load data and initialize variables
-    df100 = pd.read_pickle("/home/mkhanom/Final_Model_T/full_illustris_df100.pkl")
+    df100 = pd.read_pickle("full_illustris_df100.pkl")
 
     # Specify selected features and process target variable
     selected_features = [

@@ -30,7 +30,7 @@ def get_feature_units():
 
 
 def get_train_test_data(log_data=True):
-    df100 = pd.read_pickle("/home/mkhanom/Final_Model_T/full_illustris_df100.pkl")
+    df100 = pd.read_pickle("full_illustris_df100.pkl")
     G = 4.302e-6  # kpc (km/s)^2 M_sun^-1
 
     M1 = df100['SubhaloMassInHalfRad']
