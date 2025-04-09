@@ -3,7 +3,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from preprocess_data import *
+import pickle
+from process_data import *
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 from interpret.glassbox import ExplainableBoostingRegressor
@@ -15,12 +16,18 @@ if __name__ == "__main__":
  
     # Get the training and testing data
     X_train, X_test, y_train, y_test = get_train_test_data(log_data=False)
+ 
+    # Ensure float64 and clean values in X_train
+    X_train = X_train.astype(np.float64)
+    X_train.replace([np.inf, -np.inf], 0, inplace=True)
+    X_train.fillna(0, inplace=True)
+    X_train = X_train.clip(-1e15, 1e15)
 
     # Initialize RandomForestRegressor with specified parameters
     rf = RandomForestRegressor(n_estimators=300, max_depth=30, min_samples_split=15,
                                min_samples_leaf=6, max_samples=0.75,random_state=42, n_jobs=9)
      
-    X_train = np.nan_to_num(X_train, nan=0.0, posinf=0.0, neginf=0.0)
+  
     # Train the model on the entire training dataset
     rf.fit(X_train, y_train)
     
@@ -28,13 +35,18 @@ if __name__ == "__main__":
     with open('rf_trained.pkl', 'wb') as rf_pkl:
         pickle.dump(rf, rf_pkl)
         
-    # Handled NaN or infinite values in X_test
-    X_test = np.nan_to_num(X_test, nan=0.0, posinf=0.0, neginf=0.0)
+    # Clean X_test the same way
+    X_test = X_test.astype(np.float64)
+    X_test.replace([np.inf, -np.inf], 0, inplace=True)
+    X_test.fillna(0, inplace=True)
+    X_test = X_test.clip(-1e15, 1e15)
     
-    # Plot the results
-    plt.plot(y_test, rf.predict(X_test), 'k,')
-    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r-', 
-             label=f'$R^2 = {r2_score(y_test, rf.predict(X_test)):.3f}$')
+   # Predict and plot
+    y_pred = rf.predict(X_test)
+    r2 = r2_score(y_test, y_pred)
+
+    plt.plot(y_test, y_pred, 'k,')
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r-', label=f'$R^2 = {r2:.3f}$')
     plt.legend()
     plt.xlabel('True Baryon Fraction')
     plt.ylabel('Predicted Baryon Fraction')
